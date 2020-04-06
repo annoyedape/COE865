@@ -10,20 +10,20 @@ package routercontrol;
  * @author ape
  */
 public class RController {
-    private int rcid;
+    int rcid;
     private String ip;
-    private int asn1;
-    private int asn2;
-    private double cost1;
-    private double cost2;
-    private int port1;
-    private int port2;
-    private int port3;
-    private int intCost1;
-    private int intCost2;
-    private int intCost3;
+    int asn1;
+    int asn2;
+    int cost1;
+    int cost2;
+    int port1;
+    int port2;
+    int port3;
+    int intCost1;
+    int intCost2;
+    int intCost3;
 
-    public RController(int rcid, String ip, int asn1, int asn2, double cost1, double cost2, int port1, int port2, int port3, int intCost1, int intCost2, int intCost3) {
+    public RController(int rcid, String ip, int asn1, int asn2, int cost1, int cost2, int port1, int port2, int port3, int intCost1, int intCost2, int intCost3) {
         this.rcid = rcid;
         this.ip = ip;
         this.asn1 = asn1;
@@ -61,8 +61,6 @@ public class RController {
     public void setIntCost3(int intCost3) {
         this.intCost3 = intCost3;
     }
-
-    
 
     public void setPort1(int port1) {
         this.port1 = port1;
@@ -104,11 +102,11 @@ public class RController {
         return asn2;
     }
 
-    public double getCost1() {
+    public int getCost1() {
         return cost1;
     }
 
-    public double getCost2() {
+    public int getCost2() {
         return cost2;
     }
 
@@ -128,13 +126,12 @@ public class RController {
         this.asn2 = asn2;
     }
 
-    public void setCost1(double cost1) {
+    public void setCost1(int cost1) {
         this.cost1 = cost1;
     }
 
-    public void setCost2(double cost2) {
+    public void setCost2(int cost2) {
         this.cost2 = cost2;
-    }
-    
+    }  
     
 }
