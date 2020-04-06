@@ -22,8 +22,11 @@ public class RController {
     int intCost1;
     int intCost2;
     int intCost3;
+    int bw1;
+    int bw2;
+    int bw3;
 
-    public RController(int rcid, String ip, int asn1, int asn2, int cost1, int cost2, int port1, int port2, int port3, int intCost1, int intCost2, int intCost3) {
+    public RController(int rcid, String ip, int asn1, int asn2, int cost1, int cost2, int port1, int port2, int port3, int intCost1, int intCost2, int intCost3, int bw1, int bw2, int bw3) {
         this.rcid = rcid;
         this.ip = ip;
         this.asn1 = asn1;
@@ -36,54 +39,9 @@ public class RController {
         this.intCost1 = intCost1;
         this.intCost2 = intCost2;
         this.intCost3 = intCost3;
-    }
-
-    public int getIntCost1() {
-        return intCost1;
-    }
-
-    public int getIntCost2() {
-        return intCost2;
-    }
-
-    public int getIntCost3() {
-        return intCost3;
-    }
-
-    public void setIntCost1(int intCost1) {
-        this.intCost1 = intCost1;
-    }
-
-    public void setIntCost2(int intCost2) {
-        this.intCost2 = intCost2;
-    }
-
-    public void setIntCost3(int intCost3) {
-        this.intCost3 = intCost3;
-    }
-
-    public void setPort1(int port1) {
-        this.port1 = port1;
-    }
-
-    public void setPort2(int port2) {
-        this.port2 = port2;
-    }
-
-    public void setPort3(int port3) {
-        this.port3 = port3;
-    }
-
-    public int getPort1() {
-        return port1;
-    }
-
-    public int getPort2() {
-        return port2;
-    }
-
-    public int getPort3() {
-        return port3;
+        this.bw1 = bw1;
+        this.bw2 = bw2;
+        this.bw3 = bw3;
     }
 
     public int getRcid() {
@@ -110,6 +68,42 @@ public class RController {
         return cost2;
     }
 
+    public int getPort1() {
+        return port1;
+    }
+
+    public int getPort2() {
+        return port2;
+    }
+
+    public int getPort3() {
+        return port3;
+    }
+
+    public int getIntCost1() {
+        return intCost1;
+    }
+
+    public int getIntCost2() {
+        return intCost2;
+    }
+
+    public int getIntCost3() {
+        return intCost3;
+    }
+
+    public int getBw1() {
+        return bw1;
+    }
+
+    public int getBw2() {
+        return bw2;
+    }
+
+    public int getBw3() {
+        return bw3;
+    }
+
     public void setRcid(int rcid) {
         this.rcid = rcid;
     }
@@ -132,6 +126,44 @@ public class RController {
 
     public void setCost2(int cost2) {
         this.cost2 = cost2;
-    }  
+    }
+
+    public void setPort1(int port1) {
+        this.port1 = port1;
+    }
+
+    public void setPort2(int port2) {
+        this.port2 = port2;
+    }
+
+    public void setPort3(int port3) {
+        this.port3 = port3;
+    }
+
+    public void setIntCost1(int intCost1) {
+        this.intCost1 = intCost1;
+    }
+
+    public void setIntCost2(int intCost2) {
+        this.intCost2 = intCost2;
+    }
+
+    public void setIntCost3(int intCost3) {
+        this.intCost3 = intCost3;
+    }
+
+    public void setBw1(int bw1) {
+        this.bw1 = bw1;
+    }
+
+    public void setBw2(int bw2) {
+        this.bw2 = bw2;
+    }
+
+    public void setBw3(int bw3) {
+        this.bw3 = bw3;
+    }
     
+    
+
 }

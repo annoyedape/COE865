@@ -21,6 +21,7 @@ public class RouterControl {
     int destArray[] = new int[4];
     int pathArray[] = new int[10];
     int costArray[] = new int[10];
+    int bwArray[] = new int [10];
     int source = 10;
     int dest = 20;
     
@@ -43,10 +44,10 @@ public class RouterControl {
     }
     
     public void createRouters(){
-        routers[0] = new RController(1, "10.1.1.1", 10, 20, 1, 2, 2, 3, 0, 1, 1, 0);
-        routers[1] = new RController(2, "10.1.1.2", 10, 40, 1, 4, 1, 3, 4, 1, 1, 1);
-        routers[2] = new RController(3, "10.1.1.3", 10, 30, 1, 3, 1, 2, 4, 1, 1, 1);
-        routers[3] = new RController(4, "10.1.1.4", 20, 30, 2, 3, 2, 3, 0, 1, 1, 0);
+        routers[0] = new RController(1, "10.1.1.1", 10, 20, 1, 2, 2, 3, 0, 1, 1, 0, 3, 3, 3);
+        routers[1] = new RController(2, "10.1.1.2", 10, 40, 1, 4, 1, 3, 4, 1, 1, 1, 3, 3, 3);
+        routers[2] = new RController(3, "10.1.1.3", 10, 30, 1, 3, 1, 2, 4, 1, 1, 1, 3, 3, 3);
+        routers[3] = new RController(4, "10.1.1.4", 20, 30, 2, 3, 2, 3, 0, 1, 1, 0, 3, 3, 3);
     }
     public void displayRouters() {
         for (RController r:routers){
@@ -99,21 +100,25 @@ public class RouterControl {
                         if (routers[i].port1 == j+1){
                             pathArray[k] = (routers[i].rcid*10)+(routers[j].rcid);
                             costArray[k] = routers[i].intCost1 + sLocalCost + dLocalCost;
+                            bwArray[k] = routers[i].bw1;
                             k++;
                         }
                         else if (routers[i].port2 == j+1){
                             pathArray[k] = (routers[i].rcid*10)+(routers[j].rcid);
                             costArray[k] = routers[i].intCost2 + sLocalCost + dLocalCost;
+                            bwArray[k] = routers[i].bw2;
                             k++;
                         }
                         else if (routers[i].port3 == j+1){
                             pathArray[k] = (routers[i].rcid*10)+(routers[j].rcid);
                             costArray[k] = routers[i].intCost3 + sLocalCost + dLocalCost;
+                            bwArray[k] = routers[i].bw3;
                             k++;
                         }
                         else if (routers[i] == routers[j]){
                             pathArray[k] = (routers[j].rcid);
                             costArray[k] = sLocalCost + dLocalCost;
+                            bwArray[k] = 25;
                             k++;
                         }
                         else {
@@ -121,16 +126,34 @@ public class RouterControl {
                                 if (routers[(routers[i].port1)-1].port1 == j+1){
                                     pathArray[k] = (routers[i].rcid*100)+(routers[(routers[i].port1)-1].rcid*10)+(routers[j].rcid);
                                     costArray[k] = routers[i].intCost1 + routers[(routers[i].port1)-1].intCost1 + sLocalCost + dLocalCost;
+                                    if (routers[(routers[i].port1)-1].bw1 < bwArray[k]){
+                                        bwArray[k] = routers[(routers[i].port1)-1].bw1;
+                                    }
+                                    else {
+                                        bwArray[k] = routers[i].bw1;
+                                    }
                                     k++;
                                 }
                                 else if (routers[(routers[i].port1)-1].port2 == j+1){
                                     pathArray[k] = (routers[i].rcid*100)+(routers[(routers[i].port1)-1].rcid*10)+(routers[j].rcid);
                                     costArray[k] = routers[i].intCost1 + routers[(routers[i].port1)-1].intCost2 + sLocalCost + dLocalCost;
+                                    if (routers[(routers[i].port1)-1].bw1 < bwArray[k]){
+                                        bwArray[k] = routers[(routers[i].port1)-1].bw2;
+                                    }
+                                    else {
+                                        bwArray[k] = routers[i].bw2;
+                                    }
                                     k++;
                                 }
                                 else if (routers[(routers[i].port1)-1].port3 == j+1){
                                     pathArray[k] = (routers[i].rcid*100)+(routers[(routers[i].port1)-1].rcid*10)+(routers[j].rcid);
                                     costArray[k] = routers[i].intCost1 + routers[(routers[i].port1)-1].intCost3 + sLocalCost + dLocalCost;
+                                    if (routers[(routers[i].port1)-1].bw1 < bwArray[k]){
+                                        bwArray[k] = routers[(routers[i].port1)-1].bw3;
+                                    }
+                                    else {
+                                        bwArray[k] = routers[i].bw3;
+                                    }
                                     k++;
                                 }
                                 else {
@@ -185,16 +208,34 @@ public class RouterControl {
                                 if (routers[(routers[i].port2)-1].port1 == j+1){
                                     pathArray[k] = (routers[i].rcid*100)+(routers[(routers[i].port2)-1].rcid*10)+(routers[j].rcid);
                                     costArray[k] = routers[i].intCost1 + routers[(routers[i].port2)-1].intCost1 + sLocalCost + dLocalCost;
+                                    if (routers[(routers[i].port2)-1].bw1 < bwArray[k]){
+                                        bwArray[k] = routers[(routers[i].port2)-1].bw1;
+                                    }
+                                    else {
+                                        bwArray[k] = routers[i].bw2;
+                                    }
                                     k++;
                                 }
                                 else if (routers[(routers[i].port2)-1].port2 == j+1){
                                     pathArray[k] = (routers[i].rcid*100)+(routers[(routers[i].port2)-1].rcid*10)+(routers[j].rcid);
                                     costArray[k] = routers[i].intCost1 + routers[(routers[i].port2)-1].intCost2 + sLocalCost + dLocalCost;
+                                    if (routers[(routers[i].port2)-1].bw2 < bwArray[k]){
+                                        bwArray[k] = routers[(routers[i].port2)-1].bw2;
+                                    }
+                                    else {
+                                        bwArray[k] = routers[i].bw2;
+                                    }
                                     k++;
                                 }
                                 else if (routers[(routers[i].port2)-1].port3 == j+1){
                                     pathArray[k] = (routers[i].rcid*100)+(routers[(routers[i].port2)-1].rcid*10)+(routers[j].rcid);
                                     costArray[k] = routers[i].intCost1 + routers[(routers[i].port2)-1].intCost3 + sLocalCost + dLocalCost;
+                                    if (routers[(routers[i].port2)-1].bw3 < bwArray[k]){
+                                        bwArray[k] = routers[(routers[i].port2)-1].bw3;
+                                    }
+                                    else {
+                                        bwArray[k] = routers[i].bw2;
+                                    }
                                     k++;
                                 }
                                 else {
@@ -249,16 +290,34 @@ public class RouterControl {
                                 if (routers[(routers[i].port3)-1].port1 == j+1){
                                     pathArray[k] = (routers[i].rcid*100)+(routers[(routers[i].port3)-1].rcid*10)+(routers[j].rcid);
                                     costArray[k] = routers[i].intCost1 + routers[(routers[i].port3)-1].intCost1 + sLocalCost + dLocalCost;
+                                    if (routers[(routers[i].port3)-1].bw1 < bwArray[k]){
+                                        bwArray[k] = routers[(routers[i].port3)-1].bw1;
+                                    }
+                                    else {
+                                        bwArray[k] = routers[i].bw3;
+                                    }
                                     k++;
                                 }
                                 else if (routers[(routers[i].port3)-1].port2 == j+1){
                                     pathArray[k] = (routers[i].rcid*100)+(routers[(routers[i].port3)-1].rcid*10)+(routers[j].rcid);
                                     costArray[k] = routers[i].intCost1 + routers[(routers[i].port3)-1].intCost2 + sLocalCost + dLocalCost;
+                                    if (routers[(routers[i].port3)-1].bw2 < bwArray[k]){
+                                        bwArray[k] = routers[(routers[i].port3)-1].bw2;
+                                    }
+                                    else {
+                                        bwArray[k] = routers[i].bw3;
+                                    }
                                     k++;
                                 }
                                 else if (routers[(routers[i].port3)-1].port3 == j+1){
                                     pathArray[k] = (routers[i].rcid*100)+(routers[(routers[i].port3)-1].rcid*10)+(routers[j].rcid);
                                     costArray[k] = routers[i].intCost1 + routers[(routers[i].port3)-1].intCost3 + sLocalCost + dLocalCost;
+                                    if (routers[(routers[i].port3)-1].bw3 < bwArray[k]){
+                                        bwArray[k] = routers[(routers[i].port3)-1].bw3;
+                                    }
+                                    else {
+                                        bwArray[k] = routers[i].bw3;
+                                    }
                                     k++;
                                 }
                                 else {
@@ -320,6 +379,7 @@ public class RouterControl {
     public void printPath() {
         System.out.println("Path: " + Arrays.toString(pathArray));
         System.out.println("Cost: " + Arrays.toString(costArray));
+        System.out.println("Bandwidth: " + Arrays.toString(bwArray));
     }
     public void findBestPath() {
         int cheap = 9;
@@ -331,6 +391,7 @@ public class RouterControl {
         }
         System.out.println("Best path is: " + pathArray[cheap]);
         System.out.println("Cost of best path: " + costArray[cheap]);
+        System.out.println("Bandwidth of path is: " + bwArray[cheap]);
     }
     
 }
