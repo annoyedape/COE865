@@ -6,6 +6,9 @@
 package routercontrol;
 
 import java.util.*;
+import java.util.concurrent.TimeUnit;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 /**
  *
  * @author ape
@@ -39,14 +42,24 @@ public class RouterControl {
         r.dest = myDest.nextInt();
         System.out.println("The source client is: ASN" + r.source);
         System.out.println("The destination client is: ASN" + r.dest);
-        System.out.println("Seeking source and destination client:");
-        r.findFromTo();
-        System.out.println("Finding Paths...");
-        r.findPath();
-        //System.out.println("Showing Paths and Costs:");
-        //r.printPath();
-        System.out.println("Choosing Best Path...");
-        r.findBestPath();
+        
+        while(true){
+            System.out.println("Seeking source and destination client:");
+            r.findFromTo();
+            System.out.println("Finding Paths...");
+            r.findPath();
+            //System.out.println("Showing Paths and Costs:");
+            //r.printPath();
+            System.out.println("Choosing Best Path...");
+            r.findBestPath();
+            try {
+                TimeUnit.MINUTES.sleep(3);
+            } catch (InterruptedException ex) {
+                Logger.getLogger(RouterControl.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            System.out.println("Recomputing Path...");
+        }
+        
         
     }
     
