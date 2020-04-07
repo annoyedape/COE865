@@ -5,8 +5,7 @@
  */
 package routercontrol;
 
-import java.util.Arrays;
-
+import java.util.*;
 /**
  *
  * @author ape
@@ -22,8 +21,8 @@ public class RouterControl {
     int pathArray[] = new int[10];
     int costArray[] = new int[10];
     int bwArray[] = new int [10];
-    int source = 10;
-    int dest = 20;
+    int source;
+    int dest;
     
     public static void main(String[] args) {
         // TODO code application logic here
@@ -32,12 +31,20 @@ public class RouterControl {
         r.createRouters();
         System.out.println("Display Routers:");
         r.displayRouters();
-        System.out.println("Show source and destination client:");
+        System.out.println("Please enter your source:");
+        Scanner mySource = new Scanner(System.in);
+        r.source = mySource.nextInt();
+        System.out.println("Please enter your destination:");
+        Scanner myDest = new Scanner(System.in);
+        r.dest = myDest.nextInt();
+        System.out.println("The source client is: ASN" + r.source);
+        System.out.println("The destination client is: ASN" + r.dest);
+        System.out.println("Seeking source and destination client:");
         r.findFromTo();
         System.out.println("Finding Paths...");
         r.findPath();
-        System.out.println("Showing Paths and Costs:");
-        r.printPath();
+        //System.out.println("Showing Paths and Costs:");
+        //r.printPath();
         System.out.println("Choosing Best Path...");
         r.findBestPath();
         
@@ -72,8 +79,8 @@ public class RouterControl {
                 destArray[i] = 0;
             }
         }
-        System.out.println("Sources: " + Arrays.toString(sourceArray));
-        System.out.println("Destinations: " + Arrays.toString(destArray));
+        //System.out.println("Sources: " + Arrays.toString(sourceArray));
+        //System.out.println("Destinations: " + Arrays.toString(destArray));
     }
     
     public void findPath() {
@@ -382,16 +389,26 @@ public class RouterControl {
         System.out.println("Bandwidth: " + Arrays.toString(bwArray));
     }
     public void findBestPath() {
-        int cheap = 9;
-        for (int w = 0; w < 10; w++){
-            if ((costArray[w] < cheap)&&(costArray[w] != 0)){
-                cheap = w;
-            }
-            else {}
+        int min = costArray[0];
+	int index=0;
+        for(int i = 0; i < costArray.length; i++)
+	       {
+	            if(min > costArray[i] &&(costArray[i] != 0))
+	            {
+	                min = costArray[i];
+	                index=i;
+	            }
+	        }
+
+        //System.out.println("Best path is: " + pathArray[index]);
+        //System.out.println("Cost of best path: " + costArray[index]);
+        //System.out.println("Bandwidth of path is: " + bwArray[index]);
+        String pathString = String.valueOf(pathArray[index]);
+        char[] fixedString = new char[pathString.length()];
+        for(int i = 0; i < pathString.length(); i++){
+            fixedString[i] = pathString.charAt(i);    
         }
-        System.out.println("Best path is: " + pathArray[cheap]);
-        System.out.println("Cost of best path: " + costArray[cheap]);
-        System.out.println("Bandwidth of path is: " + bwArray[cheap]);
+        System.out.println("Destination: " + dest + ", Path = " + Arrays.toString(fixedString) + ", Bandwidth = " + bwArray[index] + ", Cost = " + costArray[index]);
     }
     
 }
